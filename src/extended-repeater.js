@@ -15,32 +15,41 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-function repeater(/*str, options*/) {
-  // str = String(str);
+function repeater(str, options) {
+  let buf = "", add = [], res =[];
 
-  // // let options = {
-  // //   repeatTimes: ('repeatTimes' in opt && typeof(opt.repeatTimes) === 'number') ? opt.repeatTimes : 1, // кол-во повторений строки
-  // //   separator: 'separator' in opt ? opt.separator : '+', // разделитель строки
-  // //   addition: 'addition' in opt ? String(opt.addition) : '', // допополнение к строке
-  // //   additionRepeatTimes: ('additionRepeatTimes' in opt && typeof(opt.additionRepeatTimes) === 'number') ? opt.additionRepeatTimes : 1, // кол-во дополнений к строке
-  // //   additionSeparator: 'additionSeparator' in opt ? opt.additionSeparator : '|' // разделитель дополлнений к строке
-  // // };
+  if (options.separator === undefined) {
+      options.separator = "+";
+  }
+  if (options.additionSeparator === undefined) {
+      options.additionSeparator = "|";
+  }
 
-  // let extra = '';
-  // if (options.additionRepeatTimes > 0) {
-  //   extra = options.addition;
-  //   for (let i = 1; i < options.additionRepeatTimes; i++) {
-  //     extra += options.additionSeparator + options.addition
-  //   }
-  // }
+  if (options.repeatTimes === undefined) {
+      options.repeatTimes = 1;
+  }
+  if (options.additionRepeatTimes === undefined) {
+      options.additionRepeatTimes = 1;
+  }
 
-  // let message = str + extra;
-  // for (let i = 1; i < options.repeatTimes; i++) {
-  //     message += options.separator + str + extra;
-  // }
+  if (options.addition === undefined) {
+      options.addition = "";
+  }
   
-  // return message;
-  throw new NotImplementedError('Not implemented');
+  buf = String(str);
+
+  for (let j = 0; j < options.additionRepeatTimes; j++){
+      add.push(String(options.addition));
+  }
+
+  buf += add.join(`${options.additionSeparator}`);
+  console.log(buf)
+  for (let i = 0; i < options.repeatTimes; i++){
+      res.push(buf);
+  }
+
+  return res.join(`${options.separator}`);
+  // throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
 }
 
