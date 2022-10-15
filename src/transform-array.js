@@ -14,9 +14,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 function transform(arr) {
-  if (!Array.isArray(arr)) {
-		throw new Error('input argument must be an array')
-	}
+ 
 	if (Object.prototype.toString.call(arr) !== '[object Array]') {
 		throw new Error("'arr' parameter must be an instance of the Array!");
 	  }
